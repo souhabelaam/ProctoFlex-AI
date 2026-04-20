@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_DB: proctoflex
       POSTGRES_USER: proctoflex
-      POSTGRES_PASSWORD: proctoflex_password
+      POSTGRES_PASSWORD: CHANGE_ME_DB_PASSWORD_STRONG
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./backend/init.sql:/docker-entrypoint-initdb.d/init.sql
@@ -36,9 +36,9 @@ services:
       dockerfile: Dockerfile
     container_name: proctoflex-backend
     environment:
-      - DATABASE_URL=postgresql://proctoflex:proctoflex_password@postgres:5432/proctoflex
+      - DATABASE_URL=postgresql://proctoflex:CHANGE_ME_DB_PASSWORD_STRONG@postgres:5432/proctoflex
       - REDIS_URL=redis://redis:6379
-      - SECRET_KEY=your-secret-key-here-change-in-production
+      - SECRET_KEY=CHANGE_ME_WITH_A_LONG_RANDOM_SECRET_KEY
       - ALGORITHM=HS256
       - ACCESS_TOKEN_EXPIRE_MINUTES=30
       - DEBUG=false
@@ -144,7 +144,7 @@ services:
     image: grafana/grafana:latest
     container_name: proctoflex-grafana
     environment:
-      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SECURITY_ADMIN_PASSWORD=CHANGE_ME_GRAFANA_ADMIN_PASSWORD
     volumes:
       - grafana_data:/var/lib/grafana
       - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
@@ -162,8 +162,8 @@ services:
     image: minio/minio:latest
     container_name: proctoflex-minio
     environment:
-      MINIO_ROOT_USER: minioadmin
-      MINIO_ROOT_PASSWORD: minioadmin123
+      MINIO_ROOT_USER: CHANGE_ME_MINIO_USER
+      MINIO_ROOT_PASSWORD: CHANGE_ME_MINIO_PASSWORD
     volumes:
       - minio_data:/data
     ports:
@@ -181,7 +181,7 @@ services:
       dockerfile: Dockerfile.surveillance
     container_name: proctoflex-surveillance
     environment:
-      - DATABASE_URL=postgresql://proctoflex:proctoflex_password@postgres:5432/proctoflex
+      - DATABASE_URL=postgresql://proctoflex:CHANGE_ME_DB_PASSWORD_STRONG@postgres:5432/proctoflex
       - REDIS_URL=redis://redis:6379
       - AI_SERVICE_URL=http://ai-service:8001
     volumes:
